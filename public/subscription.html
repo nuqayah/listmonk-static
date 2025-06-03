@@ -1,0 +1,71 @@
+{{ define "content" }}
+<div>
+    {{ if .Data.Email }}
+        <h1>إدارة اشتراكك</h1>
+        <p>مرحباً {{ if .Data.Name }}{{ .Data.Name }}{{ else }}{{ .Data.Email }}{{ end }}،</p>
+        
+        <div class="alert alert-info">
+            <p>هذه الصفحة تمكنك من إدارة اشتراكك في النشرات الإخبارية والقوائم البريدية.</p>
+        </div>
+        
+        <h3>بياناتك</h3>
+        <form method="post" action="{{ .SubscriptionRoute }}">
+            <input type="hidden" name="uuid" value="{{ .Data.UUID }}">
+            <input type="hidden" name="_csrf" value="{{ .CSRF }}">
+            
+            <div>
+                <label for="name">الاسم</label>
+                <input type="text" id="name" name="name" value="{{ .Data.Name }}" placeholder="اسمك الكامل">
+            </div>
+            
+            <div>
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" value="{{ .Data.Email }}" disabled>
+                <input type="hidden" name="email" value="{{ .Data.Email }}">
+            </div>
+            
+            <h3>قوائم البريد</h3>
+            {{ range .Data.Lists }}
+                <div style="margin-bottom: 15px; padding: 15px; border: 1px solid #eee; border-radius: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <label>
+                                <input type="checkbox" name="l" value="{{ .UUID }}" {{ if .SubscriptionStatus }}checked{{ end }}>
+                                <strong>{{ .Name }}</strong>
+                            </label>
+                            <p>{{ .Description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+            
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn">حفظ التغييرات</button>
+            </div>
+        </form>
+        
+        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+            <h3>خيارات إضافية</h3>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                <form method="post" action="{{ .ExportDataRoute }}" style="margin-left: 10px;">
+                    <input type="hidden" name="uuid" value="{{ .Data.UUID }}">
+                    <input type="hidden" name="_csrf" value="{{ .CSRF }}">
+                    <button type="submit" class="btn" style="background-color: #6c757d;">تصدير بياناتي</button>
+                </form>
+                
+                <form method="post" action="{{ .BlocklistRoute }}" onsubmit="return confirm('هل أنت متأكد من رغبتك في حذف اشتراكك؟ لن تتلقى أي رسائل إخبارية بعد ذلك.')">
+                    <input type="hidden" name="uuid" value="{{ .Data.UUID }}">
+                    <input type="hidden" name="_csrf" value="{{ .CSRF }}">
+                    <button type="submit" class="btn" style="background-color: #dc3545;">إلغاء الاشتراك</button>
+                </form>
+            </div>
+        </div>
+    {{ else }}
+        <h1>إدارة الاشتراك</h1>
+        <div class="alert alert-danger">
+            <p>رابط غير صالح أو منتهي الصلاحية.</p>
+        </div>
+    {{ end }}
+</div>
+{{ end }}

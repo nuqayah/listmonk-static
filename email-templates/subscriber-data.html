@@ -1,0 +1,49 @@
+<h2>بياناتك</h2>
+
+<p>مرحباً {{ .Subscriber.Name }}،</p>
+
+<p>فيما يلي نسخة من بياناتك المخزنة لدينا:</p>
+
+<table>
+    <tr>
+        <td>المعرف:</td>
+        <td>{{ .Subscriber.UUID }}</td>
+    </tr>
+    <tr>
+        <td>البريد الإلكتروني:</td>
+        <td>{{ .Subscriber.Email }}</td>
+    </tr>
+    <tr>
+        <td>الاسم:</td>
+        <td>{{ .Subscriber.Name }}</td>
+    </tr>
+    <tr>
+        <td>الحالة:</td>
+        <td>{{ .Subscriber.Status }}</td>
+    </tr>
+    <tr>
+        <td>تاريخ الإنشاء:</td>
+        <td>{{ .Subscriber.CreatedAt }}</td>
+    </tr>
+    <tr>
+        <td>تاريخ التحديث:</td>
+        <td>{{ .Subscriber.UpdatedAt }}</td>
+    </tr>
+</table>
+
+<h3>البيانات الإضافية</h3>
+<pre>{{ .Subscriber.Attribs }}</pre>
+
+<h3>القوائم المشترك بها</h3>
+<table>
+    {{ range .Lists }}
+    <tr>
+        <td>{{ .Name }}</td>
+        <td>{{ .UUID }}</td>
+    </tr>
+    {{ else }}
+    <tr>
+        <td>لا توجد اشتراكات في قوائم</td>
+    </tr>
+    {{ end }}
+</table>

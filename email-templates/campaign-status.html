@@ -1,0 +1,36 @@
+<h2>{{ if eq .Status "running" }}الحملة قيد التشغيل{{ else if eq .Status "finished" }}اكتملت الحملة{{ else if eq .Status "cancelled" }}تم إلغاء الحملة{{ else }}حالة الحملة{{ end }}</h2>
+
+<p>حالة الحملة: {{ .Campaign.Name }}</p>
+
+<table>
+    <tr>
+        <td>المعرف:</td>
+        <td>{{ .Campaign.UUID }}</td>
+    </tr>
+    <tr>
+        <td>الموضوع:</td>
+        <td>{{ .Campaign.Subject }}</td>
+    </tr>
+    <tr>
+        <td>من:</td>
+        <td>{{ .Campaign.FromEmail }}</td>
+    </tr>
+    <tr>
+        <td>الحالة:</td>
+        <td>{{ .Status }}</td>
+    </tr>
+    <tr>
+        <td>تاريخ البدء:</td>
+        <td>{{ .StartedAt }}</td>
+    </tr>
+    {{ if eq .Status "finished" }}
+    <tr>
+        <td>تاريخ الانتهاء:</td>
+        <td>{{ .UpdatedAt }}</td>
+    </tr>
+    {{ end }}
+</table>
+
+<p>
+    <a href="{{ .ViewLive }}">عرض مباشر للحملة</a>
+</p>

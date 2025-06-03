@@ -1,0 +1,25 @@
+<h2>حالة استيراد المشتركين</h2>
+
+<p>اكتمل استيراد المشتركين.</p>
+
+<table>
+    <tr>
+        <td>إجمالي المشتركين:</td>
+        <td>{{ .Stats.Total }}</td>
+    </tr>
+    <tr>
+        <td>تمت إضافة:</td>
+        <td>{{ .Stats.Inserted }}</td>
+    </tr>
+    <tr>
+        <td>تم تحديث:</td>
+        <td>{{ .Stats.Updated }}</td>
+    </tr>
+    <tr>
+        <td>فشل:</td>
+        <td>{{ .Stats.Failed }}</td>
+    </tr>
+</table>
+
+<p>فشل الاستيراد (إن وجد):</p>
+<pre>{{ .Errors }}</pre>
