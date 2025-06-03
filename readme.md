@@ -1,15 +1,25 @@
-for using these static files with binary listmonk do the following
+for using these static files with listmonk binary do the following
 
-1. `git clone https://github.com/nuqayah/listmonk-static.git`
-2. edit your listmonk.service by adding your static folder path
-
-```
-ExecStart=/usr/bin/listmonk --config /etc/listmonk/config.toml --static-dir /path/to/static
+1. create the dir and fetching the files with:
 
 ```
+mise run add_static
+```
 
-3. restart your service
+2. setup data base
 
 ```
-sudo systemctl restart listmonk
+mise run db_run
+```
+
+3. get binary file
+
+```
+mise run get_binary
+```
+
+4. start listmonk
+
+```
+mise run prod
 ```
