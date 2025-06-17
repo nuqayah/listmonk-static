@@ -1,36 +1,25 @@
-<h2>{{ if eq .Status "running" }}الحملة قيد التشغيل{{ else if eq .Status "finished" }}اكتملت الحملة{{ else if eq .Status "cancelled" }}تم إلغاء الحملة{{ else }}حالة الحملة{{ end }}</h2>
-
-<p>حالة الحملة: {{ .Campaign.Name }}</p>
-
-<table>
+{{ define "campaign-status" }}
+{{ template "header" . }}
+<h2>{{ L.Ts "email.status.campaignUpdateTitle" }}</h2>
+<table width="100%">
     <tr>
-        <td>المعرف:</td>
-        <td>{{ .Campaign.UUID }}</td>
+        <td width="30%"><strong>{{ L.Ts "globals.terms.campaign" }}</strong></td>
+        <td><a href="{{ RootURL }}/admin/campaigns/{{ index . " ID" }}">{{ index . "Name" }}</a></td>
     </tr>
     <tr>
-        <td>الموضوع:</td>
-        <td>{{ .Campaign.Subject }}</td>
+        <td width="30%"><strong>{{ L.Ts "email.status.status" }}</strong></td>
+        <td>{{ index . "Status" }}</td>
     </tr>
     <tr>
-        <td>من:</td>
-        <td>{{ .Campaign.FromEmail }}</td>
+        <td width="30%"><strong>{{ L.Ts "email.status.campaignSent" }}</strong></td>
+        <td>{{ index . "Sent" }} / {{ index . "ToSend" }}</td>
     </tr>
+    {{ if ne (index . "Reason") "" }}
     <tr>
-        <td>الحالة:</td>
-        <td>{{ .Status }}</td>
-    </tr>
-    <tr>
-        <td>تاريخ البدء:</td>
-        <td>{{ .StartedAt }}</td>
-    </tr>
-    {{ if eq .Status "finished" }}
-    <tr>
-        <td>تاريخ الانتهاء:</td>
-        <td>{{ .UpdatedAt }}</td>
+        <td width="30%"><strong>{{ L.Ts "email.status.campaignReason" }}</strong></td>
+        <td>{{ index . "Reason" }}</td>
     </tr>
     {{ end }}
 </table>
-
-<p>
-    <a href="{{ .ViewLive }}">عرض مباشر للحملة</a>
-</p>
+{{ template "footer" }}
+{{ end }}

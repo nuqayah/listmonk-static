@@ -1,25 +1,19 @@
-<h2>حالة استيراد المشتركين</h2>
-
-<p>اكتمل استيراد المشتركين.</p>
-
-<table>
+{{ define "import-status" }}
+{{ template "header" . }}
+<h2>{{ L.Ts "email.status.importTitle" }}</h2>
+<table width="100%">
     <tr>
-        <td>إجمالي المشتركين:</td>
-        <td>{{ .Stats.Total }}</td>
+        <td width="30%"><strong>{{ L.Ts "email.status.importFile" }}</strong></td>
+        <td><a href="{{ RootURL }}/admin/subscribers/import">{{ .Name }}</a></td>
     </tr>
     <tr>
-        <td>تمت إضافة:</td>
-        <td>{{ .Stats.Inserted }}</td>
+        <td width="30%"><strong>{{ L.Ts "email.status.status" }}</strong></td>
+        <td>{{ .Status }}</td>
     </tr>
     <tr>
-        <td>تم تحديث:</td>
-        <td>{{ .Stats.Updated }}</td>
-    </tr>
-    <tr>
-        <td>فشل:</td>
-        <td>{{ .Stats.Failed }}</td>
+        <td width="30%"><strong>{{ L.Ts "email.status.importRecords" }}</strong></td>
+        <td>{{ .Imported }} / {{ .Total }}</td>
     </tr>
 </table>
-
-<p>فشل الاستيراد (إن وجد):</p>
-<pre>{{ .Errors }}</pre>
+{{ template "footer" }}
+{{ end }}
