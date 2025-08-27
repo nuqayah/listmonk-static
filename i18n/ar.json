@@ -49,5 +49,7 @@
   "public.unsubTitle": "إلغاء الاشتراك",
   "public.unsubbedInfo": "تم إلغاء اشتراكك بنجاح.",
   "public.unsubbedTitle": "أُلغي الاشتراك",
-  "public.unsubscribeTitle": "إلغاء الاشتراك من القائمة البريدية"
+  "public.unsubscribeTitle": "إلغاء الاشتراك من القائمة البريدية",
+  "campaigns.continue": "متابعة"
+
 }
